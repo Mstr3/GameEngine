@@ -29,6 +29,7 @@ namespace GameEngine {
 
 	class GE_API WindowCloseEvent : public Event
 	{
+	public:
 		WindowCloseEvent() {}
 
 		EVENT_CLASS_TYPE(WindowClose)
@@ -37,6 +38,7 @@ namespace GameEngine {
 
 	class GE_API AppTickEvent : public Event
 	{
+	public:
 		AppTickEvent() {}
 
 		EVENT_CLASS_TYPE(AppTick)
@@ -46,6 +48,7 @@ namespace GameEngine {
 
 	class GE_API AppUpdateEvent : public Event
 	{
+	public:
 		AppUpdateEvent() {}
 
 		EVENT_CLASS_TYPE(AppUpdate)
@@ -54,6 +57,7 @@ namespace GameEngine {
 
 	class GE_API AppRenderEvent : public Event
 	{
+	public:
 		AppRenderEvent() {}
 
 		EVENT_CLASS_TYPE(AppRender)
