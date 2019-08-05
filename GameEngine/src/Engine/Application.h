@@ -9,6 +9,10 @@
 
 #include "Engine/ImGui/ImGuiLayer.h"
 
+#include "Engine/Renderer/Shader.h"
+#include "Engine/Renderer/Buffer.h"
+#include "Engine/Renderer/VertexArray.h"
+
 namespace GameEngine {
 
 	class GE_API Application
@@ -35,6 +39,13 @@ namespace GameEngine {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+
+		std::shared_ptr<Shader> m_BlueShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
+
+	private:
 		static Application* s_Instance;
 	};
 
