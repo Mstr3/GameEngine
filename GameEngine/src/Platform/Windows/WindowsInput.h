@@ -2,7 +2,7 @@
 
 #include "Engine/Input.h"
 
-namespace GameEngine {
+namespace Engine {
 
 	class WindowsInput : public Input
 	{

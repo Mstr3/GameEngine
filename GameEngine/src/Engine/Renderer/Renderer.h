@@ -2,17 +2,26 @@
 
 #include "RenderCommand.h"
 
-namespace GameEngine {
+#include "OrthographicCamera.h"
+#include "Shader.h"
+
+namespace Engine {
 
 	class Renderer
 	{
 	public:
-		static void BeginScene(); 
+		static void BeginScene(OrthographicCamera& camera); 
 		static void EndScene();
 
-		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+		static void Submit(const Engine::Ref<Shader>& shader, const Engine::Ref<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); };
+	private:
+		struct SceneData
+		{
+			glm::mat4 ViewProjectionMatrix;
+		};
 
+		static SceneData* s_SceneData;
 	};
 }

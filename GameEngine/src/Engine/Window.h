@@ -5,7 +5,7 @@
 #include "Engine/Core.h"
 #include "Engine/Events/Event.h"
 
-namespace GameEngine {
+namespace Engine {
 	
 	struct WindowProps
 	{

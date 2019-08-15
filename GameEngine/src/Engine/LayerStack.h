@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace GameEngine {
+namespace Engine {
 
 	class GE_API LayerStack
 	{

@@ -4,7 +4,7 @@
 
 #include "Renderer.h"
 
-namespace GameEngine {
+namespace Engine {
 
 	VertexArray* VertexArray::Create()
 	{

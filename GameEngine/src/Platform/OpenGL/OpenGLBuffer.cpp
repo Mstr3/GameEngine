@@ -3,7 +3,7 @@
 
 #include <glad/glad.h>
 
-namespace GameEngine {
+namespace Engine {
 
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
 	{

@@ -3,7 +3,7 @@
 #include "gepch.h"
 #include "Engine/Core.h"
 
-namespace GameEngine {
+namespace Engine {
 
 	enum class EventType
 	{

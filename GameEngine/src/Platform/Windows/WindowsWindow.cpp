@@ -7,7 +7,7 @@
 
 #include "Platform/OpenGL/OpenGLContext.h"
 
-namespace GameEngine {
+namespace Engine {
 
 	static bool s_GLFWInitialized = false;
 

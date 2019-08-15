@@ -2,7 +2,7 @@
 
 #include "Event.h"
 
-namespace GameEngine {
+namespace Engine {
 
 	class GE_API WindowResizeEvent : public Event
 	{

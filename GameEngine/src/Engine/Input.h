@@ -2,7 +2,7 @@
 
 #include "Engine/Core.h"
 
-namespace GameEngine {
+namespace Engine {
 
 	class GE_API Input
 	{

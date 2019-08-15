@@ -3,23 +3,23 @@
 
 #include <glad/glad.h>
 
-namespace GameEngine {
+namespace Engine {
 
 	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
 	{
 		switch (type)
 		{
-			case GameEngine::ShaderDataType::Float:		return GL_FLOAT;
-			case GameEngine::ShaderDataType::Float2:	return GL_FLOAT;
-			case GameEngine::ShaderDataType::Float3:	return GL_FLOAT;
-			case GameEngine::ShaderDataType::Float4:	return GL_FLOAT;
-			case GameEngine::ShaderDataType::Mat3:		return GL_FLOAT;
-			case GameEngine::ShaderDataType::Mat4:		return GL_FLOAT;
-			case GameEngine::ShaderDataType::Int:		return GL_INT;
-			case GameEngine::ShaderDataType::Int2:		return GL_INT;
-			case GameEngine::ShaderDataType::Int3:		return GL_INT;
-			case GameEngine::ShaderDataType::Int4:		return GL_INT;
-			case GameEngine::ShaderDataType::Bool:		return GL_BOOL;
+			case Engine::ShaderDataType::Float:		return GL_FLOAT;
+			case Engine::ShaderDataType::Float2:	return GL_FLOAT;
+			case Engine::ShaderDataType::Float3:	return GL_FLOAT;
+			case Engine::ShaderDataType::Float4:	return GL_FLOAT;
+			case Engine::ShaderDataType::Mat3:		return GL_FLOAT;
+			case Engine::ShaderDataType::Mat4:		return GL_FLOAT;
+			case Engine::ShaderDataType::Int:		return GL_INT;
+			case Engine::ShaderDataType::Int2:		return GL_INT;
+			case Engine::ShaderDataType::Int3:		return GL_INT;
+			case Engine::ShaderDataType::Int4:		return GL_INT;
+			case Engine::ShaderDataType::Bool:		return GL_BOOL;
 		}
 
 		GE_CORE_ASSERT(false, "Unknown ShaderDataType");
@@ -46,7 +46,7 @@ namespace GameEngine {
 		glBindVertexArray(0);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
+	void OpenGLVertexArray::AddVertexBuffer(const Engine::Ref<VertexBuffer>& vertexBuffer)
 	{
 		GE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout");
 
@@ -68,7 +68,7 @@ namespace GameEngine {
 		m_VertexBuffers.push_back(vertexBuffer);
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
+	void OpenGLVertexArray::SetIndexBuffer(const Engine::Ref<IndexBuffer>& indexBuffer)
 	{
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();

@@ -1,7 +1,7 @@
 #include "gepch.h"
 #include "LayerStack.h"
 
-namespace GameEngine {
+namespace Engine {
 
 	LayerStack::LayerStack()
 	{

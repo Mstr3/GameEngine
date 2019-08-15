@@ -1,7 +1,7 @@
 #include "gepch.h"
 #include "RendererAPI.h"
 
-namespace GameEngine {
+namespace Engine {
 
 	RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
 }

@@ -3,7 +3,7 @@
 
 struct GLFWwindow;
 
-namespace GameEngine {
+namespace Engine {
 
 	class OpenGLContext : public GraphicsContext
 	{
