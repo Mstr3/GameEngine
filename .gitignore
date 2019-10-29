@@ -1,8 +1,15 @@
-# Directories
-.vs/
-/bin/
+# Binaries
+**/bin/
+!vendor/bin/premake/
 bin-int/
 
 # Files
 *.user
 github.txt
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user 

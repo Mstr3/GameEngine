@@ -21,7 +21,7 @@ namespace Engine {
 			case Engine::ShaderDataType::Int4:		return GL_INT;
 			case Engine::ShaderDataType::Bool:		return GL_BOOL;
 		}
-
+		
 		GE_CORE_ASSERT(false, "Unknown ShaderDataType");
 		return 0;
 	}
@@ -57,12 +57,23 @@ namespace Engine {
 		const auto& layout = vertexBuffer->GetLayout();
 		for (const auto& element : layout)
 		{
+			auto glBaseType = ShaderDataTypeToOpenGLBaseType(element.Type);
 			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, element.GetComponentCount(),
-				ShaderDataTypeToOpenGLBaseType(element.Type),
-				element.Normalized ? GL_TRUE : GL_FALSE,
-				layout.GetStride(),
-				(const void*)element.Offset);
+			if (glBaseType == GL_INT)
+			{
+				glVertexAttribIPointer(index, element.GetComponentCount(),
+					glBaseType,
+					layout.GetStride(),
+					(const void*)(intptr_t)element.Offset);
+			}
+			else
+			{
+				glVertexAttribPointer(index, element.GetComponentCount(),
+					glBaseType,
+					element.Normalized ? GL_TRUE : GL_FALSE,
+					layout.GetStride(),
+					(const void*)(intptr_t)element.Offset);
+			}		
 			index++;
 		}
 		m_VertexBuffers.push_back(vertexBuffer);

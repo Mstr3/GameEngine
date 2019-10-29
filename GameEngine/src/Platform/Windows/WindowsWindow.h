@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/Window.h"
+#include "Engine/Core/Window.h"
 #include "Engine/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
@@ -18,9 +18,9 @@ namespace Engine {
 
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
 		inline unsigned int GetHeight() const override { return m_Data.Height; }
-
+		virtual std::pair<float, float> GetWindowPos() const override;
 		// Window attributes
-		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+		inline void SetEventCallback(EventCallbackFn&& callback) override { m_Data.EventCallback = callback; }
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
 
@@ -30,7 +30,8 @@ namespace Engine {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
-		GraphicsContext* m_Context;
+		Scope<GraphicsContext> m_Context;
+
 		struct WindowData
 		{
 			std::string Title;

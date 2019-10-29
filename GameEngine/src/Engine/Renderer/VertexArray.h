@@ -19,6 +19,6 @@ namespace Engine {
 		virtual const std::vector<Engine::Ref<VertexBuffer>>& GetVertexBuffers() const = 0;
 		virtual const Engine::Ref<IndexBuffer>& GetIndexBuffer() const = 0;
 
-		static VertexArray* Create();
+		static Ref<VertexArray> Create();
 	};
 }

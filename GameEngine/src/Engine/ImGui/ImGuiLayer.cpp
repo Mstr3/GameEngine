@@ -5,7 +5,7 @@
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
 
-#include "Engine/Application.h"
+#include "Engine/Core/Application.h"
 
 // temporary
 #include <GLFW/glfw3.h>
@@ -92,8 +92,5 @@ namespace Engine {
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
 }

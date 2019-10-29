@@ -71,12 +71,12 @@ namespace Engine {
 		BufferLayout() {}
 
 		BufferLayout(const std::initializer_list<BufferElement>& elements)
-		: m_Elements(elements)
+			: m_Elements(elements)
 		{
 			CalculateOffsetAndStride();
 		}
 
-		inline const uint32_t GetStride() const { return m_Stride; }
+		inline uint32_t GetStride() const { return m_Stride; }
 		inline const std::vector<BufferElement>& GetElements() const { return m_Elements; }
 
 		std::vector<BufferElement>::iterator begin() { return m_Elements.begin(); }
@@ -111,7 +111,7 @@ namespace Engine {
 		virtual const BufferLayout& GetLayout() const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 
-		static VertexBuffer* Create(float* vertices, uint32_t size);
+		static Ref<VertexBuffer> Create(void* vertices, uint32_t size);
 	};
 
 	class IndexBuffer
@@ -124,6 +124,6 @@ namespace Engine {
 
 		virtual uint32_t GetCount() const = 0;
 
-		static IndexBuffer* Create(uint32_t* indices, uint32_t size);
+		static Ref<IndexBuffer> Create(void* indices, uint32_t size);
 	};
 }
