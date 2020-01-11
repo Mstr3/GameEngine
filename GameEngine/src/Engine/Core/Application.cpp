@@ -21,6 +21,8 @@ namespace Engine {
 
 	Application::Application(const ApplicationProps& props)
 	{
+		GE_PROFILE_FUNCTION();
+
 		GE_CORE_ASSERT(!s_Instance, "Application already exists");
 		s_Instance = this;
 
@@ -36,22 +38,31 @@ namespace Engine {
 
 	Application::~Application()
 	{
+		GE_PROFILE_FUNCTION();
+
+		Renderer::Shutdown();
 	}
 
 	void Application::PushLayer(Layer* layer)
 	{
+		GE_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
+		GE_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)
 	{
+		GE_PROFILE_FUNCTION();
+
 		// If the event you are trying to dispatch e.GetEventType() 
 		// matches the type of the function <WindowCloseEvent>
 		// then it will run that function
@@ -70,22 +81,33 @@ namespace Engine {
 
 	void Application::Run()
 	{
+		GE_PROFILE_FUNCTION();
+
 		while (m_Running)
 		{
+			GE_PROFILE_SCOPE("RunLoop");
+
 			float time = (float)glfwGetTime(); // Platform::GetTime()
 			m_Timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
 			if (!m_Minimized)
 			{
-				// LayerStack has begin() and end() implementations
-				for (Layer* layer : m_LayerStack)
-					layer->OnUpdate(m_Timestep);
+				{
+					GE_PROFILE_SCOPE("LayerStack OnUpdate");
+
+					// LayerStack has begin() and end() implementations
+					for (Layer* layer : m_LayerStack)
+						layer->OnUpdate(m_Timestep);
+				}
 			}
 
 			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();	
+			{
+				GE_PROFILE_SCOPE("LayerStack OnImguiRender");
+				for (Layer* layer : m_LayerStack)
+					layer->OnImGuiRender();	
+			}
 			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();
@@ -100,6 +122,8 @@ namespace Engine {
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		GE_PROFILE_FUNCTION();
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;

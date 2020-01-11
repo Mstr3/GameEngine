@@ -5,13 +5,24 @@
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace Engine {
-	
+
+	Ref<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
+	{
+		switch (Renderer::GetAPI())
+		{
+			case RendererAPI::API::None:		GE_CORE_ASSERT(false, "RendererAPI::None"); return nullptr;
+			case RendererAPI::API::OpenGL:		return CreateRef<OpenGLTexture2D>(width, height);
+		}
+		GE_CORE_ASSERT(false, "Unknown RendererAPI");
+		return nullptr;
+	}
+
 	Ref<Texture2D> Texture2D::Create(const std::string& path)
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:		GE_CORE_ASSERT(false, "RendererAPI::None"); return nullptr;
-		case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLTexture2D>(path);
+			case RendererAPI::API::None:		GE_CORE_ASSERT(false, "RendererAPI::None"); return nullptr;
+			case RendererAPI::API::OpenGL:		return CreateRef<OpenGLTexture2D>(path);
 		}
 		GE_CORE_ASSERT(false, "Unknown RendererAPI");
 		return nullptr;
@@ -21,8 +32,8 @@ namespace Engine {
 	{
 		switch (RendererAPI::GetAPI())
 		{
-		case RendererAPI::API::None:	return nullptr;
-		case RendererAPI::API::OpenGL:	return std::make_shared<OpenGLTextureCube>(faces);
+			case RendererAPI::API::None:	return nullptr;
+			case RendererAPI::API::OpenGL:	return CreateRef<OpenGLTextureCube>(faces);
 		}
 		return nullptr;
 	}

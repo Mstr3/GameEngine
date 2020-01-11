@@ -10,8 +10,8 @@ namespace Engine {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:		GE_CORE_ASSERT(false, "RendererAPI::None"); return nullptr;
-		case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLVertexArray>();
+			case RendererAPI::API::None:		GE_CORE_ASSERT(false, "RendererAPI::None"); return nullptr;
+			case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLVertexArray>();
 		}
 		GE_CORE_ASSERT(false, "Unknown RendererAPI");
 		return nullptr;

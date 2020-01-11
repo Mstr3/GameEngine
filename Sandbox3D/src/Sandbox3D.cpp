@@ -169,6 +169,7 @@ public:
 		Engine::Renderer::Submit(m_SkyboxShader, m_Skybox, glm::mat4(1.0f), false);
 
 		m_SimpleShader->Bind();
+		//m_SimpleShader->SetMat4("u_ViewProjectionMatrix", viewProjection);
 		std::dynamic_pointer_cast<Engine::OpenGLShader>(m_SimpleShader)->UploadUniformMat4("u_ViewProjectionMatrix", viewProjection);
 
 		std::dynamic_pointer_cast<Engine::OpenGLShader>(m_SimpleShader)->UploadUniformFloat3("viewPos", m_Camera.GetPosition());
