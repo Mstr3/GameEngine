@@ -22,8 +22,9 @@ namespace Engine {
 	Application::Application(const ApplicationProps& props)
 	{
 		GE_PROFILE_FUNCTION();
-
+		std::string filepath = "testfilepath";
 		GE_CORE_ASSERT(!s_Instance, "Application already exists");
+
 		s_Instance = this;
 
 		m_Window = std::unique_ptr<Window>(Window::Create(WindowProps(props.Name, props.WindowWidth, props.WindowHeight)));

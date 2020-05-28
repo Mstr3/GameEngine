@@ -70,7 +70,7 @@ namespace Engine {
 		}
 		else
 		{
-			GE_CORE_ASSERT("Could not open file '{0}'", filepath);
+			GE_CORE_ERROR("Could not open file '{0}'", filepath);
 		}
 
 		return result;

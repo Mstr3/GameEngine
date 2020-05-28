@@ -6,6 +6,7 @@ bin-int/
 
 # Files
 *.user
+*.json
 github.txt
 
 # Visual Studio files and folder
