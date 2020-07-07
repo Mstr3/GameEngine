@@ -20,9 +20,11 @@ IncludeDir["glm"] = "GameEngine/vendor/glm"
 IncludeDir["stb_image"] = "GameEngine/vendor/stb_image"
 
 -- Include premake5.lua for GLFW (same as c++ #include)
-include "GameEngine/vendor/GLFW"
-include "GameEngine/vendor/GLAD"
-include "GameEngine/vendor/imgui"
+group "Dependencies"
+	include "GameEngine/vendor/GLFW"
+	include "GameEngine/vendor/GLAD"
+	include "GameEngine/vendor/imgui"
+group ""
 
 project "GameEngine"
 	location "GameEngine"
@@ -50,7 +52,9 @@ project "GameEngine"
 
 	defines
 	{
-		"_CRT_SECURE_NO_WARNINGS"
+		"_CRT_SECURE_NO_WARNINGS",
+		"GLFW_INCLUDE_NONE",
+		"GE_PLATFORM_WINDOWS"
 	}
 
 	includedirs
@@ -81,14 +85,6 @@ project "GameEngine"
 
 		defines
 		{
-			"GE_BUILD_DLL",
-			"GE_PLATFORM_WINDOWS",
-			"GLFW_INCLUDE_NONE"
-		}
-
-		postbuildcommands
-		{
-			-- ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox2D/\"")
 		}
 
 	filter "configurations:Debug"

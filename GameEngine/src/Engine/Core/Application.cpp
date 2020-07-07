@@ -60,6 +60,11 @@ namespace Engine {
 		overlay->OnAttach();
 	}
 
+	void Application::Close()
+	{
+		m_Running = false;
+	}
+
 	void Application::OnEvent(Event& e)
 	{
 		GE_PROFILE_FUNCTION();
@@ -142,7 +147,7 @@ namespace Engine {
 		{
 			case GE_KEY_ESCAPE:
 			{
-				m_Running = false;
+				Close();
 				return true;
 			}
 		}
