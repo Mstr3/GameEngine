@@ -5,10 +5,38 @@
 
 namespace Engine {
 
+	void OpenGLMessageCallback(
+		unsigned source,
+		unsigned type,
+		unsigned id,
+		unsigned severity,
+		int length,
+		const char* message,
+		const void* userParam)
+	{
+		switch (severity)
+		{
+		case GL_DEBUG_SEVERITY_HIGH:         GE_CORE_CRITICAL(message); return;
+		case GL_DEBUG_SEVERITY_MEDIUM:       GE_CORE_ERROR(message); return;
+		case GL_DEBUG_SEVERITY_LOW:          GE_CORE_WARN(message); return;
+		case GL_DEBUG_SEVERITY_NOTIFICATION: GE_CORE_TRACE(message); return;
+		}
+
+		GE_CORE_ASSERT(false, "Unknown severity level!");
+	}
+
 	void OpenGLRendererAPI::Init()
 	{
 		// TODO specific render profiler
 		GE_PROFILE_FUNCTION();
+
+#ifdef GE_DEBUG
+		glEnable(GL_DEBUG_OUTPUT);
+		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(OpenGLMessageCallback, nullptr);
+
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE);
+#endif
 
 		// TODO Depth test toggle func
 		glEnable(GL_DEPTH_TEST);
@@ -31,25 +59,23 @@ namespace Engine {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGLRendererAPI::DrawIndexed(const Engine::Ref<VertexArray>& vertexArray, bool depthTest)
+	void OpenGLRendererAPI::DrawIndexed(const Engine::Ref<VertexArray>& vertexArray, uint32_t indexCount)
 	{
-		if (!depthTest)
-			glDisable(GL_DEPTH_TEST);
-
-		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
-		
-		if (!depthTest)
-			glEnable(GL_DEPTH_TEST);
+		uint32_t count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
+		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void OpenGLRendererAPI::DrawArrays(const Engine::Ref<VertexArray>& vertexArray, bool depthTest)
+	void OpenGLRendererAPI::DrawArrays(const Engine::Ref<VertexArray>& vertexArray)
+	{
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+
+	void OpenGLRendererAPI::DepthTest(bool depthTest)
 	{
 		if (!depthTest)
 			glDisable(GL_DEPTH_TEST);
-
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		
-		if (!depthTest)
+		else
 			glEnable(GL_DEPTH_TEST);
 	}
 }

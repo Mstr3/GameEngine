@@ -2,8 +2,8 @@
 
 #include <glm/glm.hpp>
 
-namespace Engine
-{
+namespace Engine {
+
 	class OrthographicCamera
 	{
 	public:

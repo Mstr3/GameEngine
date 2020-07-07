@@ -109,8 +109,8 @@ namespace Engine {
 
 		GLuint program = glCreateProgram();
 		// max nr of shaders
-		//GE_CORE_ASSERT(shaderSources.size() <= 2, "max 2 shaders for now");
-		std::array<GLenum, 3> glShaderIDs; // Geometry works but needs more testing
+		GE_CORE_ASSERT(shaderSources.size() <= 2, "max 2 shaders for now");
+		std::array<GLenum, 2> glShaderIDs; // Geometry works but needs more testing
 		int glShaderIDIndex = 0;
 		for (auto& kv : shaderSources)
 		{
@@ -201,6 +201,13 @@ namespace Engine {
 		UploadUniformInt(name, value);
 	}
 
+	void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
+	{
+		GE_PROFILE_FUNCTION();
+
+		UploadUniformIntArray(name, values, count);
+	};
+
 	void OpenGLShader::SetFloat(const std::string& name, float value)
 	{
 		GE_PROFILE_FUNCTION();
@@ -233,6 +240,12 @@ namespace Engine {
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::UploadUniformIntArray(const std::string& name, int* values, uint32_t count)
+	{
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniform1iv(location, count, values);
 	}
 
 	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)

@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 #include "Engine/Core/Timestep.h"
-#include "Engine/Core/Core.h"
+#include "Engine/Core/Base.h"
 
 #include "Engine/Renderer/VertexArray.h"
 #include "Engine/Renderer/Buffer.h"

@@ -13,14 +13,15 @@ namespace Engine {
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		virtual void AddVertexBuffer(const Engine::Ref<VertexBuffer>& vertexBuffer) override;
-		virtual void SetIndexBuffer(const Engine::Ref<IndexBuffer>& indexBuffer) override;
+		virtual void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
+		virtual void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-		virtual const std::vector<Engine::Ref<VertexBuffer>>& GetVertexBuffers() const { return m_VertexBuffers; };
-		virtual const Engine::Ref<IndexBuffer>& GetIndexBuffer() const { return m_IndexBuffer; };
+		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const { return m_VertexBuffers; };
+		virtual const Ref<IndexBuffer>& GetIndexBuffer() const { return m_IndexBuffer; };
 	private:
 		uint32_t m_RendererID;
-		std::vector<Engine::Ref<VertexBuffer>> m_VertexBuffers;
-		Engine::Ref<IndexBuffer> m_IndexBuffer;
+		uint32_t m_VertexBufferIndex = 0;
+		std::vector<Ref<VertexBuffer>> m_VertexBuffers;
+		Ref<IndexBuffer> m_IndexBuffer;
 	};
 }

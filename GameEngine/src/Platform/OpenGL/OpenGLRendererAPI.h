@@ -12,8 +12,9 @@ namespace Engine {
 
 		virtual void SetClearColor(const glm::vec4& color) override;
 		virtual void Clear() override;
+		virtual void DepthTest(bool depthTest) override;
 
-		virtual void DrawIndexed(const Engine::Ref<VertexArray>& vertexArray, bool depthTest) override;
-		virtual void DrawArrays(const Engine::Ref<VertexArray>& vertexArray, bool depthTest) override;
+		virtual void DrawIndexed(const Engine::Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) override;
+		virtual void DrawArrays(const Engine::Ref<VertexArray>& vertexArray) override;
 	};
 }

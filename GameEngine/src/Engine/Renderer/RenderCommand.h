@@ -27,13 +27,18 @@ namespace Engine {
 			s_RendererAPI->Clear();
 		}
 
-		inline static void DrawIndexed(const Engine::Ref<VertexArray>& vertexArray, bool depthTest)
+		inline static void DrawIndexed(const Engine::Ref<VertexArray>& vertexArray, uint32_t count = 0)
 		{
-			s_RendererAPI->DrawIndexed(vertexArray, depthTest);
+			s_RendererAPI->DrawIndexed(vertexArray, count);
 		}
-		inline static void DrawArrays(const Engine::Ref<VertexArray>& vertexArray, bool depthTest)
+		inline static void DrawArrays(const Engine::Ref<VertexArray>& vertexArray)
 		{
-			s_RendererAPI->DrawArrays(vertexArray, depthTest);
+			s_RendererAPI->DrawArrays(vertexArray);
+		}
+
+		inline static void DepthTest(bool depthTest)
+		{
+			s_RendererAPI->DepthTest(depthTest);
 		}
 
 	private:

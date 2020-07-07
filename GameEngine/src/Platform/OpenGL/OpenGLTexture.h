@@ -19,6 +19,12 @@ namespace Engine {
 		virtual void SetData(void* data, uint32_t size) override;
 
 		virtual void Bind(uint32_t slot = 0) const override;
+
+		virtual bool operator==(const Texture& other) const override 
+		{ 
+			return m_RendererID == ((OpenGLTexture2D&)other).m_RendererID;
+		}
+
 	private:
 		std::string m_Path;
 		uint32_t m_Width;
@@ -38,6 +44,11 @@ namespace Engine {
 		virtual uint32_t GetID() const override { return m_RendererID; }
 
 		virtual void Bind(uint32_t slot = 0) const override;
+
+		virtual bool operator==(const Texture& other) const override
+		{
+			return m_RendererID == ((OpenGLTextureCube&)other).m_RendererID;
+		}
 	private:
 		uint32_t m_RendererID;
 		uint32_t m_Width;

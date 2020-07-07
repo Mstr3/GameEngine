@@ -68,6 +68,13 @@ namespace Engine {
 		ImGui::DestroyContext();
 	}
 
+	void ImGuiLayer::OnEvent(Event& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		e.Handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
+		e.Handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+	}
+
 	void ImGuiLayer::Begin()
 	{
 		GE_PROFILE_FUNCTION();
@@ -96,9 +103,5 @@ namespace Engine {
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(backup_current_context);
 		}
-	}
-
-	void ImGuiLayer::OnImGuiRender()
-	{
 	}
 }

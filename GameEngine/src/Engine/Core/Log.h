@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Base.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 
@@ -23,11 +23,12 @@ namespace Engine {
 #define GE_CORE_INFO(...)  ::Engine::Log::GetCoreLogger()->info(__VA_ARGS__)
 #define GE_CORE_WARN(...)  ::Engine::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define GE_CORE_ERROR(...) ::Engine::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define GE_CORE_FATAL(...) ::Engine::Log::GetCoreLogger()->fatal(__VA_ARGS__)
+#define GE_CORE_CRITICAL(...) ::Engine::Log::GetCoreLogger()->critical(__VA_ARGS__)
+
 
 // Client log macros
 #define GE_TRACE(...) ::Engine::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define GE_INFO(...)  ::Engine::Log::GetClientLogger()->info(__VA_ARGS__)
 #define GE_WARN(...)  ::Engine::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define GE_ERROR(...) ::Engine::Log::GetClientLogger()->error(__VA_ARGS__)
-#define GE_FATAL(...) ::Engine::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define GE_CRITICAL(...) ::Engine::Log::GetClientLogger()->critical(__VA_ARGS__)

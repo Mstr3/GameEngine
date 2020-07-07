@@ -52,9 +52,18 @@ namespace Engine {
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ModelMatrix", transform);
 
 		vertexArray->Bind();
-		if(vertexArray->GetIndexBuffer())
-			RenderCommand::DrawIndexed(vertexArray, depthTest);
+		//TODO: DepthTest needs to be called only with depthTest = false
+		if (vertexArray->GetIndexBuffer())
+		{
+			RenderCommand::DepthTest(depthTest);
+			RenderCommand::DrawIndexed(vertexArray);
+			RenderCommand::DepthTest(true);
+		}
 		else
-			RenderCommand::DrawArrays(vertexArray, depthTest);
+		{
+			RenderCommand::DepthTest(depthTest);
+			RenderCommand::DrawArrays(vertexArray);
+			RenderCommand::DepthTest(true);
+		}
 	}
 }

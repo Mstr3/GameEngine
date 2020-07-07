@@ -6,7 +6,7 @@
 namespace Engine {
 
 	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
-		:m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_Rotation(rotation)
+		:m_AspectRatio(aspectRatio), m_Bounds({ -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel }), m_Camera(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top), m_Rotation(rotation)
 	{
 
 	}
@@ -57,7 +57,7 @@ namespace Engine {
 		}
 
 		m_Camera.SetPosition(m_CameraPosition);
-		m_CameraTranslationSpeed = m_ZoomLevel * 2;
+		m_CameraTranslationSpeed = m_ZoomLevel;
 	}
 
 	void OrthographicCameraController::OnEvent(Event& e)
@@ -69,13 +69,19 @@ namespace Engine {
 		dispatcher.Dispatch<WindowResizeEvent>(GE_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 	}
 
+	void OrthographicCameraController::CalculateView()
+	{
+		m_Bounds = { -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel };
+		m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
+	}
+
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
 		GE_PROFILE_FUNCTION();
 
 		m_ZoomLevel -= e.GetYOffset() * 0.25f;
-		m_ZoomLevel = std::clamp(m_ZoomLevel, 0.25f, 2.0f);
-		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
+		CalculateView();
 		return true;
 	}
 
@@ -84,7 +90,7 @@ namespace Engine {
 		GE_PROFILE_FUNCTION();
 
 		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		CalculateView();
 		return true;
 	}
 }

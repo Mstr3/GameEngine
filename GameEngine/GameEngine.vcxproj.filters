@@ -60,9 +60,6 @@
     <ClInclude Include="src\Engine\Core\Application.h">
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Core.h">
-      <Filter>src\Engine\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\EntryPoint.h">
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
@@ -115,9 +112,6 @@
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Renderer\GraphicsContext.h">
-      <Filter>src\Engine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Renderer\Mesh.h">
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Renderer\OrhographicCameraController.h">
@@ -1286,6 +1280,11 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Renderer\Renderer2D.h" />
     <ClInclude Include="src\Engine\Debug\Instrumentor.h" />
+    <ClInclude Include="src\Engine\Renderer\Mesh.h" />
+    <ClInclude Include="src\Engine\Renderer\SubTexture2D.h" />
+    <ClInclude Include="src\Engine\Core\Base.h">
+      <Filter>src\Engine\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application.cpp">
@@ -1316,9 +1315,6 @@
       <Filter>src\Engine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Renderer\Framebuffer.cpp">
-      <Filter>src\Engine\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Renderer\Mesh.cpp">
       <Filter>src\Engine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Renderer\OrhographicCameraController.cpp">
@@ -1382,5 +1378,7 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="src\Engine\Renderer\Mesh.cpp" />
+    <ClCompile Include="src\Engine\Renderer\SubTexture2D.cpp" />
   </ItemGroup>
 </Project>

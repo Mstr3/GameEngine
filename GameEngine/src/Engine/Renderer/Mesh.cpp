@@ -238,8 +238,10 @@ namespace Engine {
 				});
 			m_VertexArray->AddVertexBuffer(vb);
 		}
-
-		auto ib = IndexBuffer::Create(m_Indices.data(), m_Indices.size() * sizeof(Index));
+		// OpenGLIndexBuffer was changed to take uint32_t instead of void* and this is the effect
+		// also it does m_Count * sizeof(uint32_t) instead of just m_Count to work with sandbox2D
+		// OLD: auto ib = IndexBuffer::Create(m_Indices.data(), m_Indices.size() * sizeof(Index));
+		auto ib = IndexBuffer::Create(&(m_Indices.data()->V1), m_Indices.size() * 3);
 		m_VertexArray->SetIndexBuffer(ib);
 		m_Scene = scene;
 	}
